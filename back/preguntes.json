@@ -1,0 +1,124 @@
+{
+    "preguntes": [
+        {
+            "id": 1,
+            "pregunta": "En quin any es va estrenar 'The Shawshank Redemption'?",
+            "respostes": [
+                "1982",
+                "1995",
+                "1996",
+                "1993"
+            ],
+            "resposta_correcta": 0,
+            "imatge": "../img/1.jpeg"
+        },
+        {
+            "id": 2,
+            "pregunta": "Quina és la data d'estrena de 'Pulp Fiction'?",
+            "respostes": [
+                "1994",
+                "1993",
+                "1995",
+                "1996"
+            ],
+            "resposta_correcta": 0,
+            "imatge": "../img/2.jpeg"
+        },
+        {
+            "id": 3,
+            "pregunta": "En quin any es va estrenar 'Forrest Gump'?",
+            "respostes": [
+                "1995",
+                "1994",
+                "1993",
+                "1996"
+            ],
+            "resposta_correcta": 1,
+            "imatge": "../img/3.jpeg"
+        },
+        {
+            "id": 4,
+            "pregunta": "En quin any es va estrenar 'Inception'?",
+            "respostes": [
+                "2011",
+                "2009",
+                "2010",
+                "2012"
+            ],
+            "resposta_correcta": 2,
+            "imatge": "../img/4.jpeg"
+        },
+        {
+            "id": 5,
+            "pregunta": "Quan es va estrenar 'The Dark Knight'?",
+            "respostes": [
+                "2008",
+                "2007",
+                "2009",
+                "2010"
+            ],
+            "resposta_correcta": 0,
+            "imatge": "../img/5.jpeg"
+        },
+        {
+            "id": 6,
+            "pregunta": "En quin any va sortir 'The Matrix'?",
+            "respostes": [
+                "1998",
+                "1999",
+                "2000",
+                "1997"
+            ],
+            "resposta_correcta": 1,
+            "imatge": "../img/6.jpeg"
+        },
+        {
+            "id": 7,
+            "pregunta": "Quina és la data d'estrena de 'Gladiator'?",
+            "respostes": [
+                "2000",
+                "1999",
+                "2001",
+                "1998"
+            ],
+            "resposta_correcta": 0,
+            "imatge": "../img/7.jpeg"
+        },
+        {
+            "id": 8,
+            "pregunta": "Quan es va estrenar 'Avatar'?",
+            "respostes": [
+                "2010",
+                "2008",
+                "2009",
+                "2007"
+            ],
+            "resposta_correcta": 2,
+            "imatge": "../img/8.jpeg"
+        },
+        {
+            "id": 9,
+            "pregunta": "En quin any es va estrenar 'Jaws'?",
+            "respostes": [
+                "1978",
+                "1974",
+                "1976",
+                "1975"
+            ],
+            "resposta_correcta": 3,
+            "imatge": "../img/9.jpeg"
+        },
+        {
+            "id": 10,
+            "pregunta": "Quina és la data d'estrena de 'E.T. the Extra-Terrestrial'?",
+            "respostes": [
+                "1981",
+                "1982",
+                "1983",
+                "1984"
+            ],
+            "resposta_correcta": 1,
+            "imatge": "../img/10.jpeg"
+        }
+    ]
+}

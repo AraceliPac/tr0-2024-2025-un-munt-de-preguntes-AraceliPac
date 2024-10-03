@@ -1,0 +1,255 @@
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  justify-content: center; /* Centra el contenido en el eje horizontal */
+  align-items: flex-start; /* Alinea el contenido al inicio en el eje vertical */
+}
+
+/* Nuevo contenedor para el contenido principal */
+#main-content {
+  display: flex; /* Utiliza flexbox para manejar el layout */
+  justify-content: center; /* Centro horizontal */
+  flex-direction: column; /* Estructura en columna */
+  align-items: center; /* Centro verticalmente */
+}
+
+footer {
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Menu & Content */
+.menu {
+  margin: 20px 0;
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+}
+
+#partida {
+  margin-bottom: 20px;
+}
+
+.oculto {
+  display: none;
+}
+
+/* Botones - Todos verdes */
+button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #c1c1c1;
+  cursor: not-allowed;
+}
+
+/* Estilos de Input */
+input[type="text"],
+input[type="number"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+label {
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Listado de Preguntas */
+#preguntas-container {
+  list-style-type: none;
+  padding: 0;
+  margin: 0; /* Asegúrate de que no haya margen en la lista */
+}
+
+#preguntas-container li {
+  display: flex; /* Flexbox para alinear los elementos dentro de cada li */
+  justify-content: space-between; /* Espacio entre el enunciado y los botones */
+  align-items: center; /* Alinea verticalmente */
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #e9e9e9;
+  border-radius: 5px;
+  max-width: 600px; /* Ancho máximo para el li */
+  width: 100%; /* Responsivo */
+}
+
+.pregunta {
+  flex: 1; /* Permite que el div de pregunta ocupe el espacio disponible */
+  overflow: hidden; /* Evita desbordamiento */
+  text-overflow: ellipsis; /* Mostrar "..." para textos muy largos */
+  white-space: nowrap; /* Evitar que el texto se divida en múltiples líneas */
+}
+
+.botones {
+  display: flex; /* Flexbox para alinear botones en fila */
+  gap: 10px; /* Espacio entre botones */
+}
+
+/* Estilos de los botones dentro de la lista de preguntas */
+#preguntas-container button {
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #4caf50; /* Verde para todos los botones */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar cursor al pasar por encima */
+  transition: background-color 0.3s; /* Transición suave al pasar el ratón */
+}
+
+#preguntas-container button:hover {
+  background-color: #45a049; /* Verde oscuro en hover */
+}
+
+/* Formularios */
+form {
+  margin-top: 20px;
+}
+
+form button {
+  margin-top: 10px;
+}
+
+#finalitzar {
+  text-align: center;
+  font-size: 1.1em;
+}
+
+/* Mejorar la presentación de finalitzar */
+#finalitzar h2 {
+  color: #4caf50;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+#finalitzar .resum-pregunta {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+#finalitzar .resum-correctes {
+  font-weight: bold;
+  color: #2e7d32;
+  margin-top: 15px;
+}
+
+
+
+
+.navigation-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Añade un espacio entre los botones */
+}
+
+/* Estilos para los botones de opción seleccionados */
+button.botoOp.selected {
+  background-color: #ff9800; /* Color naranja para el botón seleccionado */
+  color: white;
+}
+
+/* Estilos adicionales para hover y cuando no están seleccionados */
+button.botoOp:not(.selected):hover {
+  background-color: #45a049; /* Verde oscuro cuando se pasa el mouse */
+}
+
+
+/* Contenedor principal de los resultados */
+#finalitzar {
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 1.1em;
+  margin-top: 20px;
+  line-height: 1.6; /* Espacio entre líneas para mejor legibilidad */
+}
+
+/* Estilo del título de los resultados */
+#finalitzar h2 {
+  font-size: 1.8em;
+  color: #2e7d32; /* Color verde más oscuro */
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Estilo de cada pregunta en los resultados */
+#resultatPregunta {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc; /* Separador entre preguntas */
+  text-align: left;
+}
+
+/* Estilo para las respuestas correctas totales */
+#resumCorrectes {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #388e3c; /* Verde más oscuro para resaltar */
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+#dadesPreguntaActual {
+  display: flex; /* Usar flexbox para centrar contenido */
+  flex-direction: column; /* Alinear elementos en columna */
+  align-items: center; /* Centrar horizontalmente */
+  margin: 0 auto; /* Margen automático para centrar el div */
+  text-align: center; /* Alinear el texto al centro */
+  width: 100%; /* Ancho completo */
+  max-width: 600px; /* Máximo ancho para el div */
+}
+
+#botonesFinales {
+  display: flex; /* Usar flexbox para centrar contenido */
+  flex-direction: column; /* Apilar los botones en columna */
+  align-items: center; /* Centrar horizontalmente */
+  margin: 20px 0; /* Espacio alrededor de los botones */
+}
