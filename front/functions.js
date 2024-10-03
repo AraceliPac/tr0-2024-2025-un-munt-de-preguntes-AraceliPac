@@ -244,6 +244,7 @@ async function obtenerSesion() {
             // Aquí tienes las variables de sesión
             console.log('Nombre del jugador:', data.nombreJugador);
             console.log('Número de preguntas:', data.numPreguntes);
+
             console.log('Número de preguntas correctas:', data.correctes);
         }
     } catch (error) {
