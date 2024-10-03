@@ -6,6 +6,9 @@ document.getElementById("administrarBtn").addEventListener('click', () => {
 
 
 
+//cridar Funcions de Jugada
+migrarDades();
+jugar();
 
 async function migrarDades() {
     fetch('../back/migrate.php')
@@ -76,6 +79,11 @@ function demanarDadesJugador() {
             // Obtener los valores ingresados por el usuario
             let nombre = document.getElementById('nombre').value;
             let numPreguntes = document.getElementById('numPreguntas').value;
+
+            // Almacenar el nombre y el número de preguntas en localStorage
+            localStorage.setItem("nombreJugador", nombre);
+            localStorage.setItem("numPreguntas", numPreguntes);
+
             // Crear el objeto con los datos del jugador
             let dadesJugador = {
                 nombreJugador: nombre,
@@ -86,6 +94,9 @@ function demanarDadesJugador() {
         });
     });
 }
+
+
+
 
 function mostrarPreguntes(info, dadesJugador) {
     let indicePreguntaActual = 0; // Inicializar la primera pregunta
@@ -108,6 +119,8 @@ function mostrarPreguntaActual(info, dadesJugador, indicePreguntaActual, respost
 
         document.getElementById("reset").addEventListener('click', () => {
             document.getElementById("finalitzar").innerHTML = "";
+            localStorage.removeItem("nombreJugador");
+            localStorage.removeItem("numPreguntas");
             jugar(); // Función para reiniciar el juego
         });
         document.getElementById("enviarR").addEventListener('click', () => {
@@ -207,7 +220,7 @@ function enviarRespostes(respostesUsuari) {
         } else {
             console.log(data);
             document.getElementById("finalitzar").classList.remove("ocult");
-            let resumHtml = '<h2>RESULTATS</h2>'; // Inicializar aquí para acumular el resumen
+            let resumHtml = '<h2>RESULTATS</h2>';
             data.resum.forEach(detalle => {
                 resumHtml += `<div id="resultatPregunta">Pregunta: ${detalle.pregunta + 1} --> ${detalle.acertat ? 'Correcta' : 'Incorrecta'}</div>`;
             });
@@ -239,7 +252,4 @@ async function obtenerSesion() {
 }
 
 
-//cridar Funcions de Jugada
-migrarDades();
-jugar();
 

@@ -210,7 +210,7 @@ button.botoOp:not(.selected):hover {
 }
 
 /* Estilo del título de los resultados */
-#finalitzar h2 {
+#finalitzar h2 h3{
   font-size: 1.8em;
   color: #2e7d32; /* Color verde más oscuro */
   margin-bottom: 20px;
