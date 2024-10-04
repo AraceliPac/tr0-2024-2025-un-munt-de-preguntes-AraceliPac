@@ -6,13 +6,15 @@ $preguntaModificar = json_decode($data, true); // Decodificar el JSON a un array
 
 $response = []; // Inicializar el array de respuesta
 
-if (isset($preguntaModificar['id']) && isset($preguntaModificar['enunciado']) && isset($preguntaModificar['respuestas'])) {
+if (isset($preguntaModificar['id']) && isset($preguntaModificar['enunciado']) && isset($preguntaModificar['imagen']) && isset($preguntaModificar['respuestas'])) {
     $idPregunta = $preguntaModificar['id'];
     $enunciadoNuevo = $preguntaModificar['enunciado'];
+    $imgNuevo = $preguntaModificar['imagen'];
 
     // Actualizar el enunciado de la pregunta
-    $stmtPregunta = $conn->prepare("UPDATE preguntas SET enunciado = ? WHERE id = ?");
-    $stmtPregunta->bind_param("si", $enunciadoNuevo, $idPregunta);
+    $stmtPregunta = $conn->prepare("UPDATE preguntas SET enunciado = ?, imagen = ? WHERE id = ?");
+    $stmtPregunta->bind_param("ssi", $enunciadoNuevo, $imgNuevo, $idPregunta);
+
 
     // Ejecutar la actualización de la pregunta
     if ($stmtPregunta->execute()) {
@@ -28,6 +30,7 @@ if (isset($preguntaModificar['id']) && isset($preguntaModificar['enunciado']) &&
         $stmtRespuesta = $conn->prepare("INSERT INTO respuestas (idPregunta, enunciado, correcta) VALUES (?, ?, ?)");
         foreach ($preguntaModificar['respuestas'] as $respuesta) {
             $enunciatResposta = $respuesta['enunciado'];
+
             $correcta = $respuesta['correcta']; // Ya es 1 o 0
 
             // Insertar respuesta

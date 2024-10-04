@@ -147,28 +147,32 @@ function mostrarPreguntaActual(info, dadesJugador, indicePreguntaActual, respost
 
     // Mostrar enunciado de la pregunta
     htmlString += `<h3>${indicePreguntaActual + 1}) ${pregunta.enunciado}</h3>`;
-    htmlString += `<img src="${pregunta.imagen} alt="Imagen relacionada con la pregunta" class="imagen-pregunta""`
+    htmlString += `<img src="${pregunta.imagen}" alt="Imagen relacionada con la pregunta" class="imagen-pregunta">`;
 
     // Mostrar opciones de respuesta
+    htmlString += `<div id="dadesResposta">`;
     for (let indexResposta = 0; indexResposta < pregunta.respostes.length; indexResposta++) {
         htmlString += `
-            <button type="button" class="botoOp" id="opcio${indicePreguntaActual}-${indexResposta}" dataResposta="${pregunta.respostes[indexResposta]['id']}">
-                ${pregunta.respostes[indexResposta]['enunciado']}
-            </button><br>`;
+        <button type="button" class="botoOp" id="opcio${indicePreguntaActual}-${indexResposta}" dataResposta="${pregunta.respostes[indexResposta]['id']}">
+            ${pregunta.respostes[indexResposta]['enunciado']}
+        </button><br>`;
     }
+    htmlString += `</div>`;
 
     // Cerrar el div para la pregunta actual
     htmlString += `</div>`;
 
     // Botones "Anterior" y "Siguiente"
     htmlString += `
-        <div class="navigation-buttons">
-            ${indicePreguntaActual > 0 ? '<button type="button" id="atras">Atrás</button>' : ''}
-            <button type="button" id="siguiente">Siguiente</button>
-        </div>`;
+    <div class="navigation-buttons">
+        ${indicePreguntaActual > 0 ? '<button type="button" id="atras">Atrás</button>' : ''}
+        <button type="button" id="siguiente">Siguiente</button>
+    </div>`;
 
+    // Insertar en el DOM
     const divPartida = document.getElementById("partida");
     divPartida.innerHTML = htmlString;
+
 
     // Evento para seleccionar las opciones y cambiar color del botón
     for (let indexResposta = 0; indexResposta < pregunta.respostes.length; indexResposta++) {
@@ -201,6 +205,12 @@ function mostrarPreguntaActual(info, dadesJugador, indicePreguntaActual, respost
         }
         mostrarPreguntaActual(info, dadesJugador, indicePreguntaActual + 1, respostesUsuari); // Mostrar la siguiente pregunta
     });
+    const btnAtras = document.getElementById("atras");
+    if (btnAtras) {
+        btnAtras.addEventListener('click', function () {
+            mostrarPreguntaActual(info, dadesJugador, indicePreguntaActual - 1, respostesUsuari); // Mostrar la pregunta anterior
+        });
+    }
 }
 
 

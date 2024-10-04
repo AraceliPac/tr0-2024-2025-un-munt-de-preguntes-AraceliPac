@@ -302,3 +302,45 @@ button.botoOp:not(.selected):hover {
     font-size: 10
   }
 }
+
+
+/* Estilos para el contenedor de la pregunta */
+#dadesPreguntaActual {
+  margin-bottom: 20px; /* Espacio debajo de cada pregunta */
+  text-align: center; /* Centrar el contenido */
+}
+
+/* Estilos para la imagen dentro de la pregunta */
+.imagen-pregunta {
+  max-width: 100%; /* Que no exceda el ancho del contenedor */
+  height: auto; /* Mantener la proporción de la imagen */
+  max-height: 150px; /* Limitar el tamaño máximo de la imagen */
+  margin: 10px 0; /* Espacio arriba y abajo de la imagen */
+}
+
+/* Estilos para las opciones de respuesta */
+#dadesResposta {
+  display: flex;
+  flex-direction: column; /* Coloca los botones en columna */
+  align-items: center; /* Centra horizontalmente */
+  gap: 10px; /* Espacio entre cada botón */
+  margin-top: 15px; /* Espacio sobre las respuestas */
+}
+
+/* Estilos para los botones de opciones de respuesta */
+.botoOp {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%; /* Que los botones ocupen todo el ancho del contenedor */
+  max-width: 300px; /* Limitar el ancho máximo de los botones */
+}
+
+.botoOp:hover {
+  background-color: #45a049;
+}
+

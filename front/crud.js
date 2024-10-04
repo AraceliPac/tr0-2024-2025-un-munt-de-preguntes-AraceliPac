@@ -42,6 +42,9 @@ function demanarDadesPregunta() {
             <label for="pregunta">Pregunta:</label>
             <input type="text" id="pregunta" name="pregunta" required><br><br>
 
+            <label for="imagen">Link imagen:</label>
+            <input type="text" id="imagen" name="imagen" required><br><br>
+
             <label for="r1">Opció 1:</label>
             <input type="text" id="r1" name="r1" required><br><br>
 
@@ -66,6 +69,7 @@ function demanarDadesPregunta() {
             e.preventDefault(); // Prevenir el comportamiento por defecto del formulario
             // Obtener los valores ingresados por el usuario
             let pregunta = document.getElementById('pregunta').value;
+            let img = document.getElementById('imagen').value;
             let r1 = document.getElementById('r1').value;
             let r2 = document.getElementById('r2').value;
             let r3 = document.getElementById('r3').value;
@@ -74,6 +78,7 @@ function demanarDadesPregunta() {
             // Crear el objeto con los datos del jugador
             let dadesPregunta = {
                 enunciar: pregunta,
+                imagen, img,
                 opcio1: r1,
                 opcio2: r2,
                 opcio3: r3,
@@ -211,6 +216,17 @@ function crearFormEditar(pregunta) {
     inputEnunciado.name = 'enunciado';
     inputEnunciado.value = pregunta.enunciado; // Colocar el valor actual del enunciado
 
+    // Crear el campo para la URL de la imagen
+    const labelUrlImagen = document.createElement('label');
+    labelUrlImagen.setAttribute('for', 'url-imagen');
+    labelUrlImagen.textContent = 'URL de la imagen:';
+
+    const inputUrlImagen = document.createElement('input');
+    inputUrlImagen.type = 'text';
+    inputUrlImagen.id = 'url-imagen';
+    inputUrlImagen.name = 'url-imagen';
+    inputUrlImagen.value = pregunta.imagen; // Colocar el valor actual de la URL de la imagen
+
     // Crear respuestas
     const respuestasDiv = document.createElement('div');
     respuestasDiv.id = 'respuestas';
@@ -259,11 +275,14 @@ function crearFormEditar(pregunta) {
     form.onsubmit = async function (event) {
         event.preventDefault(); // Evitar envío tradicional del formulario
         guardarCambios(pregunta.id);
+        // console.log(pregunta.id);
     };
 
     // Agregar todos los elementos al formulario
     form.appendChild(labelEnunciado);
     form.appendChild(inputEnunciado);
+    form.appendChild(labelUrlImagen); // Agregar el nuevo campo
+    form.appendChild(inputUrlImagen); // Agregar el nuevo campo
     form.appendChild(respuestasDiv);
     form.appendChild(botonGuardar);
 
@@ -271,8 +290,10 @@ function crearFormEditar(pregunta) {
     container.appendChild(form);
 }
 
+
 async function guardarCambios(idPregunta) {
     const enunciado = document.getElementById('enunciado').value;
+    const imagen = document.getElementById('url-imagen').value; // Obtener el valor de la URL de la imagen
     const respuestas = [];
 
     // Asegúrate de que estás obteniendo correctamente el contenedor de respuestas
@@ -306,6 +327,7 @@ async function guardarCambios(idPregunta) {
             body: JSON.stringify({
                 id: idPregunta,
                 enunciado: enunciado,
+                imagen: imagen, // Añadir la URL de la imagen a los datos enviados
                 respuestas: respuestas
             })
         });
@@ -321,6 +343,7 @@ async function guardarCambios(idPregunta) {
         console.error('Error al guardar los cambios:', error);
     }
 }
+
 
 async function eliminar(pregunta) {
     console.log(pregunta);

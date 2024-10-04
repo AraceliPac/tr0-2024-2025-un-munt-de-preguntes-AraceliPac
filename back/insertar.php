@@ -7,14 +7,15 @@ $preguntaUsuari = json_decode($data, true);
 $response = []; // Inicializar la respuesta
 
 if (
-    isset($preguntaUsuari['enunciar']) && isset($preguntaUsuari['opcio1']) &&
+    isset($preguntaUsuari['enunciar']) && isset($preguntaUsuari['imagen']) && isset($preguntaUsuari['opcio1']) &&
     isset($preguntaUsuari['opcio2']) && isset($preguntaUsuari['opcio3']) &&
     isset($preguntaUsuari['opcio4']) && isset($preguntaUsuari['valorCorrecta'])
 ) {
     // Insertar pregunta
-    $stmtPregunta = $conn->prepare("INSERT INTO preguntas (enunciado) VALUES (?)");
-    $stmtPregunta->bind_param("s", $enunciado);
+    $stmtPregunta = $conn->prepare("INSERT INTO preguntas (enunciado, imagen) VALUES (?,?)");
+    $stmtPregunta->bind_param("ss", $enunciado, $imagen);
     $enunciado = $preguntaUsuari['enunciar'];
+    $imagen = $preguntaUsuari['imagen'];
     $valorCorrecta = $preguntaUsuari['valorCorrecta'];
 
     // Ejecutar inserción de pregunta
