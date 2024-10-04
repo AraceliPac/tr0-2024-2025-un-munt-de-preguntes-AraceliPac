@@ -10,7 +10,7 @@
                 "1993"
             ],
             "resposta_correcta": 0,
-            "imatge": "../img/1.jpeg"
+            "imatge": "https://miro.medium.com/v2/resize:fit:828/format:webp/1*ZuyHle2wBnM1MY0xkIa9hA.jpeg"
         },
         {
             "id": 2,
@@ -22,7 +22,7 @@
                 "1996"
             ],
             "resposta_correcta": 0,
-            "imatge": "../img/2.jpeg"
+            "imatge": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Pulp_Fiction_Logo.svg/1920px-Pulp_Fiction_Logo.svg.png"
         },
         {
             "id": 3,
@@ -34,7 +34,7 @@
                 "1996"
             ],
             "resposta_correcta": 1,
-            "imatge": "../img/3.jpeg"
+            "imatge": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Forrest_Gump.svg/1024px-Forrest_Gump.svg.png"
         },
         {
             "id": 4,
@@ -46,7 +46,7 @@
                 "2012"
             ],
             "resposta_correcta": 2,
-            "imatge": "../img/4.jpeg"
+            "imatge": "https://es.wikipedia.org/wiki/Inception#/media/Archivo:El_oriegen_2010.png"
         },
         {
             "id": 5,
@@ -58,7 +58,7 @@
                 "2010"
             ],
             "resposta_correcta": 0,
-            "imatge": "../img/5.jpeg"
+            "imatge": "https://es.wikipedia.org/wiki/The_Dark_Knight#/media/Archivo:The_gun_used_in_The_Dark_Knight_(6831733106).jpg"
         },
         {
             "id": 6,
@@ -70,7 +70,7 @@
                 "1997"
             ],
             "resposta_correcta": 1,
-            "imatge": "../img/6.jpeg"
+            "imatge": "https://es.wikipedia.org/wiki/Matrix#/media/Archivo:The.Matrix.glmatrix.2.png"
         },
         {
             "id": 7,
@@ -82,7 +82,7 @@
                 "1998"
             ],
             "resposta_correcta": 0,
-            "imatge": "../img/7.jpeg"
+            "imatge": "https://es.wikipedia.org/wiki/Gladiator#/media/Archivo:Gladiator_logo.svg"
         },
         {
             "id": 8,
@@ -94,7 +94,7 @@
                 "2007"
             ],
             "resposta_correcta": 2,
-            "imatge": "../img/8.jpeg"
+            "imatge": "https://es.wikipedia.org/wiki/Avatar_(pel%C3%ADcula)#/media/Archivo:Avatar-Logo-avatar.svg"
         },
         {
             "id": 9,
@@ -106,7 +106,7 @@
                 "1975"
             ],
             "resposta_correcta": 3,
-            "imatge": "../img/9.jpeg"
+            "imatge": "https://es.wikipedia.org/wiki/Tibur%C3%B3n_(pel%C3%ADcula)#/media/Archivo:Jaws_movie_poster.png"
         },
         {
             "id": 10,
@@ -118,7 +118,7 @@
                 "1984"
             ],
             "resposta_correcta": 1,
-            "imatge": "../img/10.jpeg"
+            "imatge": "https://es.wikipedia.org/wiki/E.T.,_el_extraterrestre#/media/Archivo:ET_logo.svg"
         }
     ]
 }

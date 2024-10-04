@@ -9,7 +9,8 @@ try {
     // Crear tabla preguntas
     $sqlCreatePreguntas = "CREATE TABLE IF NOT EXISTS preguntas (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        enunciado VARCHAR(250) NOT NULL
+        enunciado VARCHAR(250) NOT NULL,
+        imagen VARCHAR(250) NOT NULL
     );";
     if ($conn->query($sqlCreatePreguntas) !== TRUE) {
         throw new Exception('Error al crear la tabla preguntas: ' . $conn->error);
@@ -49,8 +50,8 @@ try {
         // Migración de datos
         if ($totalPreguntas == 0) {
             // Preparar statement para insertar preguntas
-            $stmtPregunta = $conn->prepare("INSERT INTO preguntas (enunciado) VALUES (?);");
-            $stmtPregunta->bind_param("s", $pregText);  // "s" para string
+            $stmtPregunta = $conn->prepare("INSERT INTO preguntas (enunciado, imagen) VALUES (?,?);");
+            $stmtPregunta->bind_param("ss", $pregText, $img); ///revisa!!!!!!
 
             // Preparar statement para insertar respuestas
             $stmtRespuesta = $conn->prepare("INSERT INTO respuestas (idPregunta, enunciado, correcta) VALUES (?, ?, ?);");
@@ -58,6 +59,7 @@ try {
 
             foreach ($preguntes["preguntes"] as $valor) {
                 $pregText = $valor["pregunta"];
+                $img = $valor["imatge"];
 
                 // Ejecutar la inserción de la pregunta
                 if ($stmtPregunta->execute()) {

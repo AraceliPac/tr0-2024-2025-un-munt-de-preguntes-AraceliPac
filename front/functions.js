@@ -147,6 +147,7 @@ function mostrarPreguntaActual(info, dadesJugador, indicePreguntaActual, respost
 
     // Mostrar enunciado de la pregunta
     htmlString += `<h3>${indicePreguntaActual + 1}) ${pregunta.enunciado}</h3>`;
+    htmlString += `<img src="${pregunta.imagen} alt="Imagen relacionada con la pregunta" class="imagen-pregunta""`
 
     // Mostrar opciones de respuesta
     for (let indexResposta = 0; indexResposta < pregunta.respostes.length; indexResposta++) {
