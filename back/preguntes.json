@@ -46,7 +46,7 @@
                 "2012"
             ],
             "resposta_correcta": 2,
-            "imatge": "https://es.wikipedia.org/wiki/Inception#/media/Archivo:El_oriegen_2010.png"
+            "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQKp8nCzeGZsMnS0lM3jrU_TGNHzm5cI7SUQ&s"
         },
         {
             "id": 5,
@@ -58,7 +58,7 @@
                 "2010"
             ],
             "resposta_correcta": 0,
-            "imatge": "https://es.wikipedia.org/wiki/The_Dark_Knight#/media/Archivo:The_gun_used_in_The_Dark_Knight_(6831733106).jpg"
+            "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRno-ahrJHuDq6yZIeUb8TtQoVfgEbhjOv5Gw&s"
         },
         {
             "id": 6,
@@ -70,7 +70,7 @@
                 "1997"
             ],
             "resposta_correcta": 1,
-            "imatge": "https://es.wikipedia.org/wiki/Matrix#/media/Archivo:The.Matrix.glmatrix.2.png"
+            "imatge": "https://www.vectorizados.com/muestras/matrix_film.jpg"
         },
         {
             "id": 7,
@@ -82,7 +82,7 @@
                 "1998"
             ],
             "resposta_correcta": 0,
-            "imatge": "https://es.wikipedia.org/wiki/Gladiator#/media/Archivo:Gladiator_logo.svg"
+            "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_K-f6gAXhGdT8NMjYTgdcKt04kPVWKlzTNg&s"
         },
         {
             "id": 8,
@@ -94,7 +94,7 @@
                 "2007"
             ],
             "resposta_correcta": 2,
-            "imatge": "https://es.wikipedia.org/wiki/Avatar_(pel%C3%ADcula)#/media/Archivo:Avatar-Logo-avatar.svg"
+            "imatge": "https://i.blogs.es/605b7a/avatar-logo/650_1200.jpeg"
         },
         {
             "id": 9,
@@ -106,7 +106,7 @@
                 "1975"
             ],
             "resposta_correcta": 3,
-            "imatge": "https://es.wikipedia.org/wiki/Tibur%C3%B3n_(pel%C3%ADcula)#/media/Archivo:Jaws_movie_poster.png"
+            "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThi30FK6DZzk0cDfxLIc_31ilNg0pF-JbWhQ&s"
         },
         {
             "id": 10,
@@ -118,7 +118,7 @@
                 "1984"
             ],
             "resposta_correcta": 1,
-            "imatge": "https://es.wikipedia.org/wiki/E.T.,_el_extraterrestre#/media/Archivo:ET_logo.svg"
+            "imatge": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCPHGRJ6aFQq8TZdKSkJ9ZRWLy3eNButAuhA&s"
         }
     ]
 }

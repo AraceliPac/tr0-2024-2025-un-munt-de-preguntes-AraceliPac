@@ -344,3 +344,12 @@ button.botoOp:not(.selected):hover {
   background-color: #45a049;
 }
 
+#contador {
+  text-align: center;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+}

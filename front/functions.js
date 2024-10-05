@@ -262,6 +262,3 @@ async function obtenerSesion() {
         console.error('Error al obtener la sesión:', error);
     }
 }
-
-
-

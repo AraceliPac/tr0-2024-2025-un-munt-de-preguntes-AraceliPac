@@ -1,5 +1,4 @@
 //CRUD
-console.log("CRUD cargado");
 document.getElementById("listarBtn").addEventListener("click", function () {
     llistar()
 });;
@@ -346,7 +345,7 @@ async function guardarCambios(idPregunta) {
 
 
 async function eliminar(pregunta) {
-    console.log(pregunta);
+
     try {
         if (pregunta) {
             // Enviar el objeto pregunta como JSON en la petición
