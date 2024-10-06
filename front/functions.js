@@ -8,9 +8,8 @@ document.getElementById("administrarBtn").addEventListener('click', () => {
 let respostesUsuari = [];
 let contador = 30;
 let interval;
-let globalInfo; // Definimos esta variable global
+let globalInfo;
 
-// Llamar a las funciones de jugada
 migrarDades();
 jugar();
 
@@ -131,7 +130,7 @@ function finalPartida() {
     detenerTemporizador(); // Detener el temporizador si se termina la partida antes del tiempo
     const finalHtml = `
         <div id="botonesFinales">
-            <button type="button" id="enviarR">Enviar Respuesats</button>
+            <button type="button" id="enviarR">Enviar respuestas</button>
             <button type="button" id="reset">Reiniciar test</button><br>
             ${respostesUsuari.length < globalInfo.length ? '<p style="color: red;">No has respondido a todas las preguntas, pero puedes enviar tus respuestas.</p>' : ''}
         </div>
@@ -180,7 +179,7 @@ function mostrarPreguntes(info, dadesJugador) {
 function mostrarPreguntaActual(info, dadesJugador, indicePreguntaActual, respostesUsuari) {
     if (indicePreguntaActual >= info.length) {
         finalPartida(); // Ya no necesitamos pasar parámetros, usamos `globalInfo`
-        return; // Si ya se han mostrado todas las preguntas, termina aquí
+        return;
     }
 
     let htmlString = '';
@@ -277,6 +276,7 @@ async function obtenerSesion() {
         if (info.error) {
             console.log('Error:', info.error);
         } else {
+            console.log("Dades sessió")
             console.log('Nombre del jugador:', info.nombreJugador);
             console.log('Número de preguntas:', info.numPreguntes);
             console.log('Número de preguntas correctas:', info.correctes);

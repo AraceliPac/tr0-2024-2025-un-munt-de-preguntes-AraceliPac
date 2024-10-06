@@ -1,4 +1,4 @@
-/* General Styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +13,12 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
-
+body {
+  background-image: url('../web/img/cine.jpg');
+  background-size: cover; /* La imagen cubre toda la pantalla */
+  background-position: center; /* Centrar la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
 header {
   background-color: #4caf50;
   color: white;
@@ -249,59 +254,7 @@ button.botoOp:not(.selected):hover {
   margin: 20px 0; /* Espacio alrededor de los botones */
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-  body {
-    padding: 10px; /* Reducir padding en dispositivos más pequeños */
-  }
 
-  header {
-    padding: 15px; /* Aumentar padding en el encabezado */
-  }
-
-  main {
-    padding: 10px; /* Reducir padding en el contenido principal */
-  }
-
-  #preguntas-container li {
-    flex-direction: column; /* Cambiar a columna para dispositivos más pequeños */
-    align-items: flex-start; /* Alinear elementos al inicio */
-  }
-
-  button {
-    font-size: 14px; /* Reducir tamaño de fuente en botones */
-  }
-
-  input[type="text"],
-  input[type="number"] {
-    font-size: 12px; /* Reducir tamaño de fuente en inputs */
-  }
-
-  #finalitzar h2 {
-    font-size: 1.3em; /* Ajustar tamaño de fuente en el título de resultados */
-  }
-
-  #finalitzar .resum-pregunta,
-  #finalitzar .resum-correctes {
-    font-size: 1em; /* Ajustar tamaño de fuente en los resúmenes */
-  }
-}
-
-@media (max-width: 480px) {
-  header {
-    font-size: 1.2em; /* Ajustar tamaño de fuente en el encabezado */
-  }
-
-  button {
-    padding: 8px 15px; /* Reducir padding en botones */
-    font-size: 12px; /* Reducir tamaño de fuente en botones */
-  }
-
-  input[type="text"],
-  input[type="number"] {
-    font-size: 10
-  }
-}
 
 
 /* Estilos para el contenedor de la pregunta */
@@ -356,4 +309,45 @@ button.botoOp:not(.selected):hover {
 h3{
   text-align: center;
   align-items: center;
+}
+
+
+@media (max-width: 768px) {
+  #preguntas-container li {
+    flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
+    align-items: flex-start;
+    padding: 10px; /* Añadir algo de padding para mejor legibilidad */
+  }
+
+  #preguntas-container li .pregunta {
+    white-space: normal; /* Permitir que el texto se divida en varias líneas */
+    word-wrap: break-word; /* Permitir que el texto largo se ajuste correctamente */
+    overflow-wrap: break-word; /* Manejar desbordamiento de palabras largas */
+    width: 100%; /* Asegurarse de que el div ocupe todo el ancho disponible */
+  }
+
+  #pregunta {
+    padding: 10px;
+    box-sizing: border-box; /* Incluir padding y borde en el ancho total */
+    width: 100%; /* Asegurar que el div ocupe todo el ancho */
+  }
+}
+
+@media (max-width: 480px) {
+  #preguntas-container li {
+    padding: 8px; /* Reducir el padding para pantallas más pequeñas */
+  }
+
+  #preguntas-container li .pregunta {
+    white-space: normal; /* Asegura que el texto se ajuste en varias líneas */
+    word-wrap: break-word;
+    overflow-wrap: break-word; /* Prevenir desbordamiento de texto */
+    width: 100%; /* Asegurar que el div ocupe todo el ancho */
+  }
+
+  #pregunta {
+    padding: 5px; /* Añadir algo de padding para mayor legibilidad */
+    box-sizing: border-box;
+    width: 100%; /* Asegurar que el div ocupe todo el ancho */
+  }
 }
