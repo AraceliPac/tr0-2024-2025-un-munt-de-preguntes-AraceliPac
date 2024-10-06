@@ -264,7 +264,7 @@ function enviarRespostes() {
                 });
                 resumHtml += `<div id="resumCorrectes">Respuestas correctas Totales: ${info.totalCorrectes}/${info.resum.length}</div>`;
                 document.getElementById("finalitzar").innerHTML = resumHtml;
-                //obtenerSesion();
+                obtenerSesion();
             }
         });
 }
