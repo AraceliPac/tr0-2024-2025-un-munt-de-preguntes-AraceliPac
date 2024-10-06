@@ -44,19 +44,19 @@ function demanarDadesPregunta() {
             <label for="imagen">Link imagen:</label>
             <input type="text" id="imagen" name="imagen" required><br><br>
 
-            <label for="r1">Opció 1:</label>
+            <label for="r1">Opción 1:</label>
             <input type="text" id="r1" name="r1" required><br><br>
 
-             <label for="r2">Opció 2:</label>
+             <label for="r2">Opción 2:</label>
             <input type="text" id="r2" name="r2" required><br><br>
 
-             <label for="r3">Opció 3:</label>
+             <label for="r3">Opción 3:</label>
             <input type="text" id="r3" name="r3" required><br><br>
 
-            <label for="r4">Opció 4:</label>
+            <label for="r4">Opción 4:</label>
             <input type="text" id="r4" name="r4" required><br><br>
 
-            <label for="valorCorrecta">Escriu l´opció correcta:</label>
+            <label for="valorCorrecta">Escribe la opción correcta:</label>
             <input type="text" id="valorCorrecta" name="valorCorrecta" required><br><br>
 
             <button id="insertarBtn" type="submit">Insertar</button>

@@ -1,33 +1,33 @@
 import "./crud.js";
 console.log("Funciones cargadas");
+
 document.getElementById("administrarBtn").addEventListener('click', () => {
-    document.getElementById("adminButtons").classList.toggle("oculto")
-})
+    document.getElementById("adminButtons").classList.toggle("oculto");
+});
 
+let respostesUsuari = [];
+let contador = 30;
+let interval;
+let globalInfo; // Definimos esta variable global
 
-
-//cridar Funcions de Jugada
+// Llamar a las funciones de jugada
 migrarDades();
 jugar();
 
 async function migrarDades() {
     fetch('../back/migrate.php')
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            //console.log(data);
+        .then(response => response.json())
+        .then(info => {
+            //console.log(info);
         });
 }
 
 function cargarDades() {
     fetch('../back/cargarDades.php')
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            // console.log("Ordenadas")
-            // console.log(data);
+        .then(response => response.json())
+        .then(info => {
+            // console.log("Ordenadas");
+            // console.log(info);
         });
 }
 
@@ -42,14 +42,14 @@ async function jugar() {
                 },
                 body: JSON.stringify(dadesJugador)
             })
-                .then(function (response) {
-                    return response.json();
+                .then(response => response.json())
+                .then(info => {
+                    console.log(info);
+                    globalInfo = info; // Guardamos la info en la variable global
+                    mostrarPreguntes(info, dadesJugador);
+                    iniciarTemporizador(); // Iniciar el temporizador cuando empiezan las preguntas
                 })
-                .then(function (data) {
-                    console.log(data);
-                    mostrarPreguntes(data, dadesJugador);
-                })
-                .catch(function (error) {
+                .catch(error => {
                     console.error("Error en el fetch: ", error);
                 });
         }
@@ -57,6 +57,42 @@ async function jugar() {
         console.log(error);
     }
 }
+
+function iniciarTemporizador() {
+    const temporizadorElement = document.getElementById("contador");
+    contador = 30; // Reiniciar el contador a 30 segundos
+
+    // Crear y agregar el h3 que muestra el tiempo restante
+    const tiempoRestanteElement = document.createElement("h3");
+    tiempoRestanteElement.id = "tiempoRestante";
+    tiempoRestanteElement.innerHTML = `El tiempo restante es: ${contador} segundos`;
+    temporizadorElement.parentElement.insertBefore(tiempoRestanteElement, temporizadorElement);
+
+    interval = setInterval(() => {
+        if (contador > 0) {
+            // Actualizamos el h3 con el tiempo restante
+            tiempoRestanteElement.innerHTML = `El tiempo restante es: ${contador} segundos`;
+            contador--;
+        } else {
+            clearInterval(interval);
+
+            // Mostrar alert al acabarse el tiempo
+            alert("Se acabó el tiempo");
+
+            // Eliminar el h3
+            tiempoRestanteElement.remove(); // Elimina el h3 del DOM
+
+
+            finalPartida();  // Llamar a la función final cuando se acabe el tiempo
+        }
+    }, 1000);
+}
+
+function detenerTemporizador() {
+    clearInterval(interval);
+}
+
+
 
 function demanarDadesJugador() {
     return new Promise(function (resolve) {
@@ -76,22 +112,60 @@ function demanarDadesJugador() {
 
         document.getElementById('form-inicio').addEventListener('submit', function (e) {
             e.preventDefault(); // Prevenir el comportamiento por defecto del formulario
-            // Obtener los valores ingresados por el usuario
             let nombre = document.getElementById('nombre').value;
             let numPreguntes = document.getElementById('numPreguntas').value;
 
-            // Almacenar el nombre y el número de preguntas en localStorage
             localStorage.setItem("nombreJugador", nombre);
             localStorage.setItem("numPreguntas", numPreguntes);
 
-            // Crear el objeto con los datos del jugador
             let dadesJugador = {
                 nombreJugador: nombre,
                 numPreguntesPartida: numPreguntes
             };
-            // Resolver la promesa con los datos del jugador
             resolve(dadesJugador);
         });
+    });
+}
+
+function finalPartida() {
+    detenerTemporizador(); // Detener el temporizador si se termina la partida antes del tiempo
+    const finalHtml = `
+        <div id="botonesFinales">
+            <button type="button" id="enviarR">Enviar Respuesats</button>
+            <button type="button" id="reset">Reiniciar test</button><br>
+            ${respostesUsuari.length < globalInfo.length ? '<p style="color: red;">No has respondido a todas las preguntas, pero puedes enviar tus respuestas.</p>' : ''}
+        </div>
+    `;
+    document.getElementById("partida").innerHTML = finalHtml;
+
+    // Obtener el h3 del tiempo restante
+    const tiempoRestanteElement = document.getElementById("tiempoRestante");
+
+    // Reiniciar el cuestionario
+    document.getElementById("reset").addEventListener('click', () => {
+        document.getElementById("finalitzar").innerHTML = "";
+        localStorage.removeItem("nombreJugador");
+        localStorage.removeItem("numPreguntas");
+
+        // Limpiar el array de respuestas
+        respostesUsuari = []; // Limpiar el array de respuestas
+
+        // Eliminar el h3 si existe
+        if (tiempoRestanteElement) {
+            tiempoRestanteElement.remove(); // Eliminar el h3 del DOM
+        }
+
+        jugar(); // Reiniciar el juego
+    });
+
+    // Enviar respuestas sin validación
+    document.getElementById("enviarR").addEventListener('click', () => {
+        // Eliminar el h3 si existe
+        if (tiempoRestanteElement) {
+            tiempoRestanteElement.remove(); // Eliminar el h3 del DOM
+        }
+        enviarRespostes(); // Función para enviar respuestas
+        respostesUsuari = [];
     });
 }
 
@@ -99,96 +173,52 @@ function demanarDadesJugador() {
 
 
 function mostrarPreguntes(info, dadesJugador) {
-    let indicePreguntaActual = 0; // Inicializar la primera pregunta
-    let respostesUsuari = []; // Almacena las respuestas del usuario
+    let indicePreguntaActual = 0;
     mostrarPreguntaActual(info, dadesJugador, indicePreguntaActual, respostesUsuari);
 }
 
 function mostrarPreguntaActual(info, dadesJugador, indicePreguntaActual, respostesUsuari) {
-    if (indicePreguntaActual === info.length) {
-        // Mostrar los botones de Enviar Respuestas y Reiniciar Cuestionario al final
-        const finalHtml = `
-        <div id="botonesFinales">
-            <button type="button" id="enviarR" ${respostesUsuari.length === info.length ? '' : 'disabled'}>Enviar Respostes</button><br>
-            <button type="button" id="reset">Reiniciar questionari</button><br>
-            ${respostesUsuari.length < info.length ? '<p style="color: red;">Por favor, responde todas las preguntas antes de enviar.</p>' : ''}
-        </div>
-    `;
-
-        document.getElementById("partida").innerHTML = finalHtml;
-
-        document.getElementById("reset").addEventListener('click', () => {
-            document.getElementById("finalitzar").innerHTML = "";
-            localStorage.removeItem("nombreJugador");
-            localStorage.removeItem("numPreguntas");
-            jugar(); // Función para reiniciar el juego
-        });
-        document.getElementById("enviarR").addEventListener('click', () => {
-            document.getElementById("enviarR").classList.toggle("oculto")
-        })
-
-        document.getElementById("enviarR").addEventListener('click', () => {
-            if (respostesUsuari.length < info.length) {
-                alert("Por favor, responde todas las preguntas antes de enviar.");
-                return; // Salir de la función si no todas las preguntas han sido respondidas
-            }
-            console.log(respostesUsuari); // Debug: Imprimir respuestas en consola
-            enviarRespostes(respostesUsuari); // Función para enviar respuestas
-        });
-
-        return;
+    if (indicePreguntaActual >= info.length) {
+        finalPartida(); // Ya no necesitamos pasar parámetros, usamos `globalInfo`
+        return; // Si ya se han mostrado todas las preguntas, termina aquí
     }
 
     let htmlString = '';
     const pregunta = info[indicePreguntaActual];
 
-    // Crear el div para la pregunta actual
     htmlString += `<div id="dadesPreguntaActual">`;
-
-    // Mostrar enunciado de la pregunta
     htmlString += `<h3>${indicePreguntaActual + 1}) ${pregunta.enunciado}</h3>`;
     htmlString += `<img src="${pregunta.imagen}" alt="Imagen relacionada con la pregunta" class="imagen-pregunta">`;
 
-    // Mostrar opciones de respuesta
     htmlString += `<div id="dadesResposta">`;
     for (let indexResposta = 0; indexResposta < pregunta.respostes.length; indexResposta++) {
         htmlString += `
-        <button type="button" class="botoOp" id="opcio${indicePreguntaActual}-${indexResposta}" dataResposta="${pregunta.respostes[indexResposta]['id']}">
+        <button type="button" class="botoOp" id="opcio${indicePreguntaActual}-${indexResposta}" infoResposta="${pregunta.respostes[indexResposta]['id']}">
             ${pregunta.respostes[indexResposta]['enunciado']}
         </button><br>`;
     }
     htmlString += `</div>`;
-
-    // Cerrar el div para la pregunta actual
     htmlString += `</div>`;
 
-    // Botones "Anterior" y "Siguiente"
     htmlString += `
     <div class="navigation-buttons">
         ${indicePreguntaActual > 0 ? '<button type="button" id="atras">Atrás</button>' : ''}
         <button type="button" id="siguiente">Siguiente</button>
     </div>`;
 
-    // Insertar en el DOM
     const divPartida = document.getElementById("partida");
     divPartida.innerHTML = htmlString;
 
-
-    // Evento para seleccionar las opciones y cambiar color del botón
     for (let indexResposta = 0; indexResposta < pregunta.respostes.length; indexResposta++) {
         const btnOpcion = document.getElementById(`opcio${indicePreguntaActual}-${indexResposta}`);
 
         btnOpcion.addEventListener('click', function () {
-            // Desactivar cualquier otro botón seleccionado
             const botonesOpciones = document.querySelectorAll(`#partida button.botoOp`);
             botonesOpciones.forEach((btn) => {
-                btn.classList.remove('selected'); // Quitar la clase 'selected' de todos
+                btn.classList.remove('selected');
             });
-
-            // Marcar el botón actual como seleccionado
             btnOpcion.classList.add('selected');
 
-            // Almacenar la respuesta seleccionada
             respostesUsuari[indicePreguntaActual] = {
                 preguntaId: pregunta.id,
                 respostaId: pregunta.respostes[indexResposta]['id']
@@ -196,67 +226,60 @@ function mostrarPreguntaActual(info, dadesJugador, indicePreguntaActual, respost
         });
     }
 
-    // Evento para el botón "Siguiente"
     document.getElementById("siguiente").addEventListener('click', function () {
-        // Comprobar si la pregunta actual ha sido respondida
         if (!respostesUsuari[indicePreguntaActual]) {
             alert("Por favor, responde a la pregunta antes de continuar.");
-            return; // Salir de la función si la pregunta no ha sido respondida
+            return;
         }
-        mostrarPreguntaActual(info, dadesJugador, indicePreguntaActual + 1, respostesUsuari); // Mostrar la siguiente pregunta
+        mostrarPreguntaActual(info, dadesJugador, indicePreguntaActual + 1, respostesUsuari);
     });
+
     const btnAtras = document.getElementById("atras");
     if (btnAtras) {
         btnAtras.addEventListener('click', function () {
-            mostrarPreguntaActual(info, dadesJugador, indicePreguntaActual - 1, respostesUsuari); // Mostrar la pregunta anterior
+            mostrarPreguntaActual(info, dadesJugador, indicePreguntaActual - 1, respostesUsuari);
         });
     }
 }
 
-
-
-
-function enviarRespostes(respostesUsuari) {
+function enviarRespostes() {
+    console.log(respostesUsuari)
     fetch("../back/finalitzar.php", {
         method: "POST",
         headers: {
             "Content-type": "application/json; charset=utf-8"
         },
-        body: JSON.stringify(respostesUsuari) // pasar a JSON
-    }).then(function (response) {
-        return response.json();
-    }).then(function (data) {
-        if (data.error) {
-            console.log(data.error);
-        } else {
-            console.log(data);
-            document.getElementById("finalitzar").classList.remove("ocult");
-            let resumHtml = '<h2>RESULTATS</h2>';
-            data.resum.forEach(detalle => {
-                resumHtml += `<div id="resultatPregunta">Pregunta: ${detalle.pregunta + 1} --> ${detalle.acertat ? 'Correcta' : 'Incorrecta'}</div>`;
-            });
-            resumHtml += `<div id="resumCorrectes">Respostes correctes Totals: ${data.totalCorrectes}/${data.resum.length}</div>`;
-            document.getElementById("finalitzar").innerHTML = resumHtml;
-            obtenerSesion();
-        }
-    });
+        body: JSON.stringify(respostesUsuari)
+
+    }).then(response => response.json())
+        .then(info => {
+            if (info.error) {
+                console.log(info.error);
+            } else {
+                console.log(info);
+                document.getElementById("finalitzar").classList.remove("ocult");
+                let resumHtml = '<h2>RESULTADOS</h2>';
+                info.resum.forEach(detalle => {
+                    resumHtml += `<div id="resultatPregunta">Pregunta: ${detalle.pregunta + 1} --> ${detalle.acertat ? 'Correcta' : 'Incorrecta'}</div>`;
+                });
+                resumHtml += `<div id="resumCorrectes">Respuestas correctas Totales: ${info.totalCorrectes}/${info.resum.length}</div>`;
+                document.getElementById("finalitzar").innerHTML = resumHtml;
+                //obtenerSesion();
+            }
+        });
 }
 
 async function obtenerSesion() {
     try {
-        // Realizar una solicitud al servidor para obtener las variables de sesión
         const response = await fetch('../back/getSession.php');
-        const data = await response.json();
+        const info = await response.json();
 
-
-        if (data.error) {
-            console.log('Error:', data.error);
+        if (info.error) {
+            console.log('Error:', info.error);
         } else {
-            // Aquí tienes las variables de sesión
-            console.log('Nombre del jugador:', data.nombreJugador);
-            console.log('Número de preguntas:', data.numPreguntes);
-
-            console.log('Número de preguntas correctas:', data.correctes);
+            console.log('Nombre del jugador:', info.nombreJugador);
+            console.log('Número de preguntas:', info.numPreguntes);
+            console.log('Número de preguntas correctas:', info.correctes);
         }
     } catch (error) {
         console.error('Error al obtener la sesión:', error);
