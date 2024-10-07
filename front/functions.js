@@ -178,7 +178,7 @@ function mostrarPreguntes(info, dadesJugador) {
 
 function mostrarPreguntaActual(info, dadesJugador, indicePreguntaActual, respostesUsuari) {
     if (indicePreguntaActual >= info.length) {
-        finalPartida(); // Ya no necesitamos pasar parámetros, usamos `globalInfo`
+        finalPartida();
         return;
     }
 
@@ -257,10 +257,22 @@ function enviarRespostes() {
             } else {
                 console.log(info);
                 document.getElementById("finalitzar").classList.remove("ocult");
+
                 let resumHtml = '<h2>RESULTADOS</h2>';
+
                 info.resum.forEach(detalle => {
-                    resumHtml += `<div id="resultatPregunta">Pregunta: ${detalle.pregunta + 1} --> ${detalle.acertat ? 'Correcta' : 'Incorrecta'}</div>`;
+                    const clase = detalle.acertat ? 'correcta' : 'incorrecta';
+                    const icono = detalle.acertat
+                        ? '<span class="icono-correcta">✔️</span>'
+                        : '<span class="icono-incorrecta">❌</span>';
+
+                    resumHtml += `
+                        <div id="resultatPregunta" class="${clase}">
+                            ${icono} <span>Pregunta ${detalle.pregunta + 1} - ${detalle.acertat ? 'Correcta' : 'Incorrecta'}</span>
+                        </div>`;
                 });
+
+                // Resumen final de las respuestas correctas
                 resumHtml += `<div id="resumCorrectes">Respuestas correctas Totales: ${info.totalCorrectes}/${info.resum.length}</div>`;
                 document.getElementById("finalitzar").innerHTML = resumHtml;
                 obtenerSesion();
