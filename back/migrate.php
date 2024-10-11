@@ -41,7 +41,7 @@ try {
 
     // Verificar si la tabla Preguntas está vacía para hacer la migración
     $sql = "SELECT COUNT(enunciado) as total FROM preguntas;";
-    $result = $conn->query($sql);  // Ejecutar la consulta
+    $result = $conn->query($sql);
 
     if ($result) {
         $row = $result->fetch_assoc();

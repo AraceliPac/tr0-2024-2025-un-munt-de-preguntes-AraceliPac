@@ -1,5 +1,5 @@
 import "./crud.js";
-console.log("Funciones cargadas");
+
 
 document.getElementById("administrarBtn").addEventListener('click', () => {
     document.getElementById("adminButtons").classList.toggle("oculto");

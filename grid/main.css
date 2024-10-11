@@ -1,0 +1,55 @@
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+    gap:1em;
+    align-items: stretch; /*alinear los elementos, strech abarca todo lo q puede*/
+    grid-template-areas: 
+    "nav nav res" 
+    "content1 cap sidebar "
+    "content2 content2 buit"
+    "footer footer footer";
+}
+#nav{
+    grid-area: nav;
+}
+#sidebar{
+    grid-area: sidebar;
+}
+#content1{
+    grid-area: content1;
+}
+#content2{
+    grid-area: content2;
+}
+#footer{
+    grid-area: footer;
+}
+
+/*decoració de les celdes*/
+.element{
+    background: #ecf0f1;
+    padding: 1em;
+    background-color: beige;
+}
+.grid > div:hover{
+    border: 1px solid #f1c40f;
+}
+
+/*exemples del parametres de text*/
+
+#nav .exemple{
+    font-family: fantasy;
+}
+#sidebar .exemple{
+    text-align: right;
+}
+#content1 .exemple{
+    word-spacing: 20px;
+}
+#content2 .exemple{
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+#footer .exemple{
+    text-decoration: underline;
+}
