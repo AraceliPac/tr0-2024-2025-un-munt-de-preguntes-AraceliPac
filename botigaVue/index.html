@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+  <title>VUE</title>
+</head>
+<body>
+  <header id="header">
+    <h1>Boutique</h1>
+  </header>
+
+  <div id="appVue">
+    <!-- Portada -->
+    <div v-if="mostrar('portada')" id="portada">
+      <h1>BENVOLGUT A LA MEVA BOTIGA</h1>
+      <button @click="canviarDiv('botiga')" class="btn-landing">Anar a la botiga</button>
+    </div>
+
+    <!-- Botiga -->
+    <div v-if="mostrar('botiga')" id="botiga" class="p-4">
+      <h1 id="titulo" class="text-2xl font-bold mb-6">LLISTAT DE PRODUCTES</h1>
+      
+      <!-- Tarjeta de confirmación de producto añadido -->
+      <div v-if="productAdded" class="product-added-card">
+        <p>Producte afegit al teu carret!</p>
+      </div>
+
+      <!-- Botones de Navegación -->
+      <div class="nav-buttons">
+        <button @click="canviarDiv('portada')" class="btn-landing">Tornar a portada</button>
+        <button @click="canviarDiv('checkout')" class="btn-landing">Anar a checkout</button>
+      </div>
+
+      <!-- Contenedor de grid para las tarjetas -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div v-for="producte in infoTotal.datos" :key="producte.id" class="bg-white rounded-lg shadow-md p-4">
+          <h2 class="text-xl font-semibold">{{ producte.title }}</h2>
+          <img :src="producte.image" alt="Product Image" class="w-full h-48 object-cover rounded-md my-4" />
+          <p class="text-sm text-gray-600"><strong>Descripció:</strong> {{ producte.description }}</p>
+          <p class="text-lg font-semibold mt-2 text-gray-800"><strong>Preu:</strong> ${{ producte.price }}</p>
+          <p class="text-sm text-gray-600"><strong>Categoría:</strong> {{ producte.category }}</p>
+
+          <!-- Botón para agregar a la cesta -->
+          <button @click="afegirProducte(producte)" class="btn-landing">Afegir a cistella</button>
+        </div>
+      </div>
+      <a href="#titulo">
+        <button class="btn-scroll">↑</button>
+      </a>
+    </div>
+
+    <!-- Checkout -->
+    <div v-if="mostrar('checkout')" id="checkout">
+      <h1>Checkout</h1>
+      <h2>La teva compra:</h2>
+      <ul>
+        <li v-for="producte in llistaCompra" :key="producte.id">
+          <div><img :src="producte.imatge" width="200px" height="200px" /></div>
+          <div><strong>Nom:</strong> {{ producte.nom }}</div>
+          <div><strong>Preu:</strong> ${{ producte.preu }}</div>
+          <button @click="eliminarProducte(producte)" class="btn-landing">Eliminar</button>
+        </li>
+      </ul>
+      <h3>Total a pagar: {{ pagament }} euros</h3>
+      <button @click="finalitzarComanda()" class="btn-landing">Fer comanda</button>
+      <button @click="canviarDiv('botiga')" class="btn-landing">Anar a la botiga</button>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script type="module" src="./js/app.js"></script> 
+</body>
+</html>
